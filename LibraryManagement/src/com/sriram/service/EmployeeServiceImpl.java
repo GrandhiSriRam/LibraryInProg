@@ -68,6 +68,28 @@ public class EmployeeServiceImpl implements EmployeeService{
 //		
 //	}
 
+	@Override
+	public boolean selectDataAnalytics(int id) throws ClassNotFoundException, SQLException {
+	
+		return employeeDao.selectDataAnalytics(id);
+	}
+
+	@Override
+	public boolean selectTechnology(int id) throws ClassNotFoundException, SQLException {
+		return employeeDao.selectTechnology(id);
+	}
+
+	@Override
+	public boolean selectManagement(int id) throws ClassNotFoundException, SQLException {
+		return employeeDao.selectDataAnalytics(id);
+	}
+
+	@Override
+	public void updateTransaction(int empId,int bookId) throws ClassNotFoundException, SQLException{
+		employeeDao.updateTransaction(empId,bookId);
+		
+	}
+
 	
 
 	

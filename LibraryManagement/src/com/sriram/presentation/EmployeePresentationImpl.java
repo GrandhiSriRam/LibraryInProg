@@ -1,14 +1,15 @@
 package com.sriram.presentation;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.Date;
 import com.sriram.bean.Book;
 import com.sriram.service.EmployeeService;
 import com.sriram.service.EmployeeServiceImpl;
 
-import java.util.Date;
+
 public class EmployeePresentationImpl implements EmployeePresentation{
 	
 	Scanner sc=new Scanner(System.in);
@@ -44,6 +45,32 @@ public class EmployeePresentationImpl implements EmployeePresentation{
 				for(Book b:books) {
 					System.out.println(b);
 				}
+				
+				System.out.println("Please select the book id from the above available books");
+				int id=sc.nextInt();
+				System.out.println("Please enter your id");
+				int empId=sc.nextInt();
+				System.out.println("please enter the date in dd/mm/yyyy");
+				
+				String d=sc.next();
+				Date date=new SimpleDateFormat("dd/mm/yyyy");
+				boolean success=true;
+				try {
+					success=employeeService.selectDataAnalytics(id);
+				} catch (ClassNotFoundException | SQLException e) {
+					e.printStackTrace();
+				}
+				if(success) {
+					System.out.println("Book issued successfully!!");
+					try {
+						employeeService.updateTransaction(empId,id);
+					} catch (ClassNotFoundException | SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				else {
+					System.out.println("Book issue failed!!");
+				}
 			}
 			else if(s.equals("b")) {
 				ArrayList<Book>books=null;
@@ -56,6 +83,28 @@ public class EmployeePresentationImpl implements EmployeePresentation{
 				
 				for(Book b:books) {
 					System.out.println(b);
+				}
+				
+				System.out.println("Please select the book id from the above available books");
+				int id=sc.nextInt();
+				System.out.println("Please enter your id");
+				int empId=sc.nextInt();
+				boolean success=true;
+				try {
+					success=employeeService.selectDataAnalytics(id);
+				} catch (ClassNotFoundException | SQLException e) {
+					e.printStackTrace();
+				}
+				if(success) {
+					System.out.println("Book issued successfully!!");
+					try {
+						employeeService.updateTransaction(empId,id);
+					} catch (ClassNotFoundException | SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				else {
+					System.out.println("Book issue failed!!");
 				}
 			}
 			else if(s.equals("c")) {
@@ -70,9 +119,30 @@ public class EmployeePresentationImpl implements EmployeePresentation{
 				for(Book b:books) {
 					System.out.println(b);
 				}
-			}
 				System.out.println("Please select the book id from the above available books");
 				int id=sc.nextInt();
+				System.out.println("Please enter your id");
+				int empId=sc.nextInt();
+				boolean success=true;
+				try {
+					success=employeeService.selectDataAnalytics(id);
+				} catch (ClassNotFoundException | SQLException e) {
+					e.printStackTrace();
+				}
+				if(success) {
+					System.out.println("Book issued successfully!!");
+					try {
+						employeeService.updateTransaction(empId,id);
+					} catch (ClassNotFoundException | SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				else {
+					System.out.println("Book issue failed!!");
+				}
+			}
+				
+				
 				break;
 //				if(employeeService.selectDataAnalytics(id)) {
 //					System.out.println("Book issued successfully");

@@ -36,6 +36,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			book.setBookCategory(resultset.getString("category"));
 			book.setTitle(resultset.getString("title"));
 			book.setAuthor(resultset.getString("author"));
+			book.setQuantity(resultset.getInt("quantity"));
 			
 			books.add(book);
 		}
@@ -62,6 +63,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			book.setBookCategory(resultset.getString("category"));
 			book.setTitle(resultset.getString("title"));
 			book.setAuthor(resultset.getString("author"));
+			book.setQuantity(resultset.getInt("quantity"));
 			
 			books.add(book);
 		}
@@ -88,7 +90,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 			book.setBookCategory(resultset.getString("category"));
 			book.setTitle(resultset.getString("title"));
 			book.setAuthor(resultset.getString("author"));
-			
+			book.setQuantity(resultset.getInt("quantity"));
 			books.add(book);
 		}
 		connection.close();
@@ -99,9 +101,70 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	@Override
 	public boolean selectDataAnalytics(int id) throws SQLException, ClassNotFoundException {
 		Connection connection = MySQLConnection.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement("update books set quantity=quantity-? where id=?");
+		statement.setInt(1, 1);
+		statement.setInt(2, id);
+		
+		int rows = statement.executeUpdate();
 
-		PreparedStatement statement = connection.prepareStatement("");
+		if (rows > 0)
+			return true;
+
+		connection.close();
 		return false;
+	}
+
+
+	@Override
+	public boolean selectTechnology(int id) throws SQLException, ClassNotFoundException {
+		
+		Connection connection = MySQLConnection.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement("update books set quantity=quantity-? where id=?");
+		statement.setInt(1, 1);
+		statement.setInt(2, id);
+		
+		int rows = statement.executeUpdate();
+
+		if (rows > 0)
+			return true;
+
+		connection.close();
+		return false;
+	}
+
+
+	@Override
+	public boolean selectManagement(int id) throws SQLException, ClassNotFoundException {
+		
+		Connection connection = MySQLConnection.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement("update books set quantity=quantity-? where id=?");
+		statement.setInt(1, 1);
+		statement.setInt(2, id);
+		
+		int rows = statement.executeUpdate();
+
+		if (rows > 0)
+			return true;
+
+		connection.close();
+		return false;
+	}
+
+
+	@Override
+	public void updateTransaction(int empId,int bookId) throws SQLException,ClassNotFoundException {
+		Connection connection = MySQLConnection.getConnection();
+		
+		PreparedStatement statement = connection.prepareStatement("insert into transaction values(?,?)");
+		statement.setInt(1, empId);
+		statement.setInt(2, bookId);
+		
+		int rows = statement.executeUpdate();
+
+		
 	}
 	
 		
