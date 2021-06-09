@@ -1,0 +1,211 @@
+package com.sriram.persistent;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+
+import com.sriram.bean.Book;
+import com.sriram.database.BookList;
+import com.sriram.bean.Employee;
+import com.sriram.helper.MySQLConnection;
+
+public class EmployeeDaoImpl implements EmployeeDao{
+
+	BookList bookList=new BookList();
+	
+
+	@Override
+	public ArrayList<Book> showAvailableDataAnalytics() throws SQLException, ClassNotFoundException{
+		ArrayList<Book> books = null;
+		Connection connection = MySQLConnection.getConnection();
+
+		PreparedStatement statement = connection.prepareStatement("select * from BOOKS where category=?");
+		statement.setString(1, "DATA ANALYTICS");
+		ResultSet resultset = statement.executeQuery();
+
+		Book book = null;
+		books = new ArrayList<Book>();
+		
+		while(resultset.next()) {
+			book=new Book();
+			book.setBookID(resultset.getInt("id"));
+			book.setBookCategory(resultset.getString("category"));
+			book.setTitle(resultset.getString("title"));
+			book.setAuthor(resultset.getString("author"));
+			
+			books.add(book);
+		}
+		connection.close();
+		return books;
+	}
+
+
+	@Override
+	public ArrayList<Book> showAvailableTechnology() throws SQLException, ClassNotFoundException {
+		ArrayList<Book> books = null;
+		Connection connection = MySQLConnection.getConnection();
+
+		PreparedStatement statement = connection.prepareStatement("select * from BOOKS where category=?");
+		statement.setString(1, "TECHNOLOGY");
+		ResultSet resultset = statement.executeQuery();
+
+		Book book = null;
+		books = new ArrayList<Book>();
+		
+		while(resultset.next()) {
+			book=new Book();
+			book.setBookID(resultset.getInt("id"));
+			book.setBookCategory(resultset.getString("category"));
+			book.setTitle(resultset.getString("title"));
+			book.setAuthor(resultset.getString("author"));
+			
+			books.add(book);
+		}
+		connection.close();
+		return books;
+	}
+	
+	@Override
+	public ArrayList<Book> showAvailableManagement() throws SQLException, ClassNotFoundException {
+		ArrayList<Book> books = null;
+		Connection connection = MySQLConnection.getConnection();
+
+		PreparedStatement statement = connection.prepareStatement("select * from BOOKS where category=?");
+		statement.setString(1, "MANAGEMENT");
+		//statement.setInt(2, 0);
+		ResultSet resultset = statement.executeQuery();
+
+		Book book = null;
+		books = new ArrayList<Book>();
+		
+		while(resultset.next()) {
+			book=new Book();
+			book.setBookID(resultset.getInt("id"));
+			book.setBookCategory(resultset.getString("category"));
+			book.setTitle(resultset.getString("title"));
+			book.setAuthor(resultset.getString("author"));
+			
+			books.add(book);
+		}
+		connection.close();
+		return books;
+	}
+
+
+	@Override
+	public boolean selectDataAnalytics(int id) throws SQLException, ClassNotFoundException {
+		Connection connection = MySQLConnection.getConnection();
+
+		PreparedStatement statement = connection.prepareStatement("");
+		return false;
+	}
+	
+		
+//		HashMap<Integer,Book>books=bookList.getBooks();
+//		Collection<Book>bo=books.values();
+//		
+//		ArrayList<Book>data=new ArrayList<>();
+//		for(Book b:bo) {
+//			if(b.getBookType().equalsIgnoreCase("Data Analytics")) {
+//				data.add(b);
+//			}
+//		}
+//		return data;
+//	}
+
+//	@Override
+//	public ArrayList<Book> showAvailableTechnology() throws SQLException, ClassNotFoundException{
+//		HashMap<Integer,Book>books=bookList.getBooks();
+//		Collection<Book>bo=books.values();
+//		
+//		ArrayList<Book>data=new ArrayList<>();
+//		for(Book b:bo) {
+//			if(b.getBookType().equalsIgnoreCase("Technology")) {
+//				data.add(b);
+//			}
+//		}
+//		return data;
+//	}
+//
+//	@Override
+//	public ArrayList<Book> showAvailableManagement() throws SQLException, ClassNotFoundException{
+//		HashMap<Integer,Book>books=bookList.getBooks();
+//		Collection<Book>bo=books.values();
+//		
+//		ArrayList<Book>data=new ArrayList<>();
+//		for(Book b:bo) {
+//			if(b.getBookType().equalsIgnoreCase("Management")) {
+//				data.add(b);
+//			}
+//		}
+//		return data;
+//		
+//	}
+//
+//	@Override
+//	public boolean selectDataAnalytics(int id) throws SQLException, ClassNotFoundException{
+//		HashMap<Integer,Book>books=bookList.getBooks();
+//		Collection<Book>bo=books.values();
+//		
+//		for(Book b:bo) {
+//			if(b.getBookID()==id) {
+//				if(b.getQuantity()-1>=0) {
+//					b.setQuantity(b.getQuantity()-1);
+//					return true;
+//				}		
+//			}
+//		}	
+//		return false;
+//	}
+//
+//	@Override
+//	public boolean selectTechnology(int id) throws SQLException, ClassNotFoundException{
+//		HashMap<Integer,Book>books=bookList.getBooks();
+//		Collection<Book>bo=books.values();
+//		
+//		for(Book b:bo) {
+//			if(b.getBookID()==id) {
+//				if(b.getQuantity()-1>=0) {
+//					b.setQuantity(b.getQuantity()-1);
+//					return true;
+//				}		
+//			}
+//		}	
+//		return false;
+//	}
+//
+//	@Override
+//	public boolean selectManagement(int id) {
+//		HashMap<Integer,Book>books=bookList.getBooks();
+//		Collection<Book>bo=books.values();
+//		
+//		for(Book b:bo) {
+//			if(b.getBookID()==id) {
+//				if(b.getQuantity()-1>=0) {
+//					b.setQuantity(b.getQuantity()-1);
+//					return true;
+//				}		
+//			}
+//		}	
+//		return false;
+//	}
+
+//	@Override
+//	public void returnBook(int id) {
+//		HashMap<Integer,Book>books=bookList.getBooks();
+//		Collection<Book>bo=books.values();
+//		for(Book b:bo) {
+//			if(b.getBookID()==id) {
+//				b.setQuantity(b.getQuantity()+1);	
+//			}
+//		}
+//		System.out.println(books);
+//		
+//	}
+
+	
+}
